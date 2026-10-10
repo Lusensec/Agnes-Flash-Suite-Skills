@@ -38,8 +38,11 @@ python examples/keyframe-video.py https://example.com/first.png https://example.
 # 图片参考
 python examples/image-reference.py https://example.com/character.png "以 <Picture 1> 中的角色为参考跳舞"
 
-# 音频参考
+# 音频参考（URL 或本地文件）
 python examples/audio-reference.py https://example.com/beat.mp3 "以 <Audio 1> 的节奏为参考生成夜间驾驶画面"
+
+# 音频参考（本地文件 Base64 内联，免公开托管；不传参数自动生成 8s 演示音）
+python examples/audio-reference-base64.py ./beat.mp3 "以 <Audio 1> 的节拍节奏为参考"
 
 # 查询任务结果
 python examples/query-video.py <video_id>
@@ -75,7 +78,8 @@ agnes-2.5-video-flash/
     ├── text-to-video.py            # 参数：[提示词]
     ├── keyframe-video.py           # 参数：[首帧URL] [尾帧URL] [提示词]
     ├── image-reference.py          # 参数：[参考图片URL] [提示词]
-    ├── audio-reference.py          # 参数：[参考音频URL] [提示词]
+    ├── audio-reference.py          # 参数：[参考音频URL或本地文件] [提示词]
+    ├── audio-reference-base64.py   # 参数：[本地音频文件路径] [提示词]（Base64 内联，免托管）
     └── query-video.py              # 参数：<video_id> [api_key]
 ```
 

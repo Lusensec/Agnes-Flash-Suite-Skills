@@ -323,7 +323,8 @@ agnes-flash-suite/
         ├── text-to-video.py          # 参数：[提示词]
         ├── keyframe-video.py         # 参数：[首帧URL] [尾帧URL] [提示词]
         ├── image-reference.py        # 参数：[参考图片URL] [提示词]
-        ├── audio-reference.py        # 参数：[参考音频URL] [提示词]
+        ├── audio-reference.py        # 参数：[参考音频URL或本地文件] [提示词]
+        ├── audio-reference-base64.py # 参数：[本地音频文件路径] [提示词]（Base64 内联，免托管）
         └── query-video.py            # 参数：<video_id> [api_key]
 ```
 

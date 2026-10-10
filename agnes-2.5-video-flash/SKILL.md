@@ -76,7 +76,10 @@ Agnes Video 2.5 Flash 是 Agnes AI 的视频生成模型，支持多种生成模
 
 | 参数 | 类型 | 说明 |
 |------|------|------|
-| `audios` | string[] | 参考音频数组（最多 3 段） |
+| `audios` | string[] | 参考音频数组（最多 3 段）。每项可为**公开 URL** 或 **Base64 Data URI**（`data:audio/mpeg;base64,…`，免托管） |
+
+约束（Flash）：单段 < 15MB、音频总时长 2–12 秒、单次请求媒体总量 < 64MB。
+URL 形式须 Agnes 服务可公开访问且在任务完成前保持有效；Data URI 形式无此限制。
 
 在 prompt 中使用 `<Audio N>` 指代音频：
 ```
@@ -167,7 +170,7 @@ print(json.loads(resp)["video_id"])
 ### 4. 音频参考
 
 ```python
-# 运行 python examples/audio-reference.py [参考音频URL] [提示词]（参数可选）
+# 运行 python examples/audio-reference.py [参考音频URL或本地文件路径] [提示词]（参数可选）
 import json, urllib.request, os
 API_KEY = os.environ.get("AGNESAI_API_KEY")
 resp = urllib.request.urlopen(urllib.request.Request(
@@ -186,6 +189,36 @@ resp = urllib.request.urlopen(urllib.request.Request(
 )).read()
 print(json.loads(resp)["video_id"])
 ```
+
+### 5. 音频参考（本地文件 / Base64 内联）
+
+本地音频无需公开托管：读文件转 Base64 Data URI 直接放进 `audios`（官方文档未写明，服务端校验门实测接受，2026-10 验证）：
+
+```python
+# 运行 python examples/audio-reference-base64.py [本地音频文件路径] [提示词]（参数可选）
+import base64, json, os, urllib.request
+API_KEY = os.environ.get("AGNESAI_API_KEY")
+with open("beat.mp3", "rb") as f:
+    audio_b64 = base64.b64encode(f.read()).decode("ascii")
+resp = urllib.request.urlopen(urllib.request.Request(
+    "https://api.agnes-ai.cn/v1/videos",
+    data=json.dumps({
+        "model": "agnes-video-2.5-flash",
+        "prompt": "以 <Audio 1> 的节拍节奏为参考，画面动作与节拍同步",
+        "seconds": "5",
+        "mode": "reference",
+        "size": "720P",
+        "aspect_ratio": "16:9",
+        "audios": [f"data:audio/mpeg;base64,{audio_b64}"]
+    }).encode(),
+    headers={"Authorization": f"Bearer {API_KEY}", "Content-Type": "application/json"},
+    method="POST"
+)).read()
+print(json.loads(resp)["video_id"])
+```
+
+> **注意**：Base64 编码后体积膨胀约 33%，注意 Flash 单段 15MB / 单次请求 64MB 上限；
+> 若某格式被 400 拒收（`did not return valid supported media`），用 ffmpeg 转 mp3 再试。
 
 ## 查询任务结果
 
@@ -382,6 +415,10 @@ A: 视频生成可能需要较长时间，**通常需 2–5 分钟**完成，建
 ### Q: 为什么进度一直显示 10%？
 
 A: 服务端的 `progress` 字段只有两档：生成中恒为 **10**，完成后跳到 **100**，中间不细分。轮询期间长时间停留在 10% 属正常现象（视频生成通常需 2–5 分钟），并非任务卡住。
+
+### Q: 本地音频文件能直接做参考吗，必须放公开 URL？
+
+A: 不必。`audios` 支持 **Base64 Data URI**（`data:audio/mpeg;base64,…`），本地文件读出来编码即可，免去公开托管；注意单段 < 15MB、请求体 < 64MB。参见示例 `examples/audio-reference-base64.py`。
 
 ## 相关文档
 
