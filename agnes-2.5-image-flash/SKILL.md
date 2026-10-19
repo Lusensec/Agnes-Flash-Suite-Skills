@@ -38,7 +38,7 @@ Agnes Image 2.5 Flash 是 Agnes AI 最新一代图像模型，整体能力全面
 | `return_base64` | boolean | ❌ | 文生图 Base64 输出时使用 |
 | `extra_body` | object | ❌ | 高级工作流的附加参数 |
 | `extra_body.response_format` | string | ❌ | 输出格式：`url` 或 `b64_json` |
-| `extra_body.image` | string[] | ❌ | 输入图像数组（图生图/多图合成必填） |
+| `extra_body.image` | string[] | 图生图/多图合成必填 | 输入图像数组（最多 6 张，超出返回 400 `too many input images`；支持公开 URL 或 Base64 Data URI） |
 
 ### 宽高比 (ratio)
 
@@ -114,6 +114,8 @@ print(json.loads(resp)["data"][0]["url"])
 ```
 
 ### 3. 多图合成
+
+> `extra_body.image` **最多 6 张**（官方 400 校验：`too many input images: N provided, at most 6 allowed`；10/19 双网关实测）。更多图片请分批合成接力。
 
 ```python
 # 运行 python examples/multi-image-combine.py [图片1URL] [图片2URL] [提示词]（参数可选）
