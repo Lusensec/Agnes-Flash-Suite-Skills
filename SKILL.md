@@ -217,10 +217,13 @@ import json, urllib.request, os, time
 API_KEY = os.environ.get("AGNESAI_API_KEY")
 
 # Step 1: 生成田园犬图片
-def gen_image(prompt, size="2K", ratio="16:9"):
+def gen_image(prompt, size="2K", ratio="16:9", extra_body=None):
+    # 文生图可不传 extra_body；多图合成时传 {"image":[...],"response_format":"url"}
+    payload = {"model":"agnes-image-2.5-flash","prompt":prompt,"size":size,"ratio":ratio,
+               "extra_body": extra_body or {"response_format":"url"}}
     resp = urllib.request.urlopen(urllib.request.Request(
         "https://api.agnes-ai.cn/v1/images/generations",
-        data=json.dumps({"model":"agnes-image-2.5-flash","prompt":prompt,"size":size,"ratio":ratio,"extra_body":{"response_format":"url"}}).encode(),
+        data=json.dumps(payload).encode(),
         headers={"Authorization":f"Bearer {API_KEY}","Content-Type":"application/json"},
         method="POST"
     )).read()
@@ -296,7 +299,7 @@ agnes-flash-suite/
 │       ├── basic-chat.py             # 参数：[用户问题]
 │       ├── image-understanding.py    # 参数：[图片URL]
 │       ├── tool-calling.py           # 参数：[用户问题]
-│       └── thinking-mode.py          # 参数：[问题] [思考等级]
+│       └── thinking-mode.py          # 参数：[问题] [思考等级] [max_tokens]
 ├── agnes-2.5-flash/                  # 对话模型子 Skill
 │   ├── SKILL.md
 │   ├── README.md
@@ -305,7 +308,7 @@ agnes-flash-suite/
 │       ├── basic-chat.py             # 参数：[用户问题]
 │       ├── image-understanding.py    # 参数：[图片URL]
 │       ├── tool-calling.py           # 参数：[用户问题]
-│       └── thinking-mode.py          # 参数：[问题] [思考等级]
+│       └── thinking-mode.py          # 参数：[问题] [思考等级] [max_tokens]
 ├── agnes-2.5-image-flash/            # 图像生成子 Skill
 │   ├── SKILL.md
 │   ├── README.md

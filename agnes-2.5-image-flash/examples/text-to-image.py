@@ -7,7 +7,6 @@
 
 import json
 import os
-import re
 import sys
 import urllib.request
 
@@ -53,7 +52,7 @@ print(json.dumps(result, indent=2, ensure_ascii=False))
 image_url = result["data"][0]["url"]
 if not image_url:
     print("[ERR] 获取图片 URL 失败")
-    exit(1)
+    sys.exit(1)
 
 print("[OK] 图片生成完成！")
 print(f"图片地址：{image_url}")

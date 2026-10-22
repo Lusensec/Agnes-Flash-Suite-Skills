@@ -94,7 +94,7 @@ print(json.dumps(result, indent=2, ensure_ascii=False))
 video_id = result.get("video_id")
 if not video_id:
     print("[ERR] 获取 video_id 失败")
-    exit(1)
+    sys.exit(1)
 
 print(f"[OK] 任务已提交，video_id: {video_id}")
 print("开始轮询查询结果（视频生成通常需要 2-5 分钟）...")
@@ -120,11 +120,11 @@ for i in range(1, MAX_RETRIES + 1):
         video_url = poll_result.get("metadata", {}).get("url") or poll_result.get("url") or poll_result.get("video_url")
         print("[OK] 视频生成完成！")
         print(f"视频地址：{video_url}")
-        exit(0)
+        sys.exit(0)
     elif status == "failed":
         error_msg = (poll_result.get("error") or {}).get("message") or poll_result.get("error") or "未知错误"
         print(f"[ERR] 视频生成失败：{error_msg}")
-        exit(1)
+        sys.exit(1)
 
 print(f"超时：等待超过 {MAX_RETRIES}x{RETRY_INTERVAL} 秒")
-exit(1)
+sys.exit(1)

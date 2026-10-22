@@ -37,8 +37,8 @@ Agnes Video 2.5 Flash 是 Agnes AI 的视频生成模型，支持多种生成模
 | `seconds` | string | ✅ | 视频时长，字符串 `"4"`–`"12"`，默认 `"5"` |
 | `mode` | string | ✅ | 生成模式：`text` / `keyframe` / `reference` |
 | `size` | string | ✅ | 固定 `"720P"` |
-| `aspect_ratio` | string | ✅ | 画幅比例 |
-| `n` | number | ✅ | 固定 `1` |
+| `aspect_ratio` | string | ❌ | 画幅比例，可省略（服务端有默认值，2026-10 实测缺省提交可正常受理） |
+| `n` | number | ❌ | 可省略；指定时固定为 `1`（2026-10 实测缺省提交可正常受理） |
 | `seed` | number | ❌ | 随机种子，可选 |
 
 ### 画幅比例 (aspect_ratio)

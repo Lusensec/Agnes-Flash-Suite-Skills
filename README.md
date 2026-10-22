@@ -83,7 +83,7 @@ AGNESAI_API_KEY=sk-你的实际API Key
 | **上下文窗口** | 512K |
 | **最大输出** | 65.5K |
 | **支持功能** | 聊天补全、图像理解、工具调用、Thinking 模式（思考等级 5 档）、流式输出 |
-| **API 端点** | `POST /v1/chat/completions` |
+| **API 端点** | `POST /v1/chat/completions`、`POST /v1/responses`、`POST /v1/messages` |
 
 **使用场景：** AI 助手、自主智能体、代码生成、图像理解、客服机器人
 
@@ -164,7 +164,7 @@ agnes-flash-suite/
 │       ├── basic-chat.py              # 基础聊天（参数：[用户问题]）
 │       ├── image-understanding.py     # 图像理解（参数：[图片URL]）
 │       ├── tool-calling.py            # 工具调用（参数：[用户问题]）
-│       └── thinking-mode.py           # Thinking 模式（参数：[问题] [思考等级]）
+│       └── thinking-mode.py           # Thinking 模式（参数：[问题] [思考等级] [max_tokens]）
 │
 ├── agnes-2.5-flash/                   # 对话模型
 │   ├── SKILL.md                       # 对话模型详细说明
@@ -174,7 +174,7 @@ agnes-flash-suite/
 │       ├── basic-chat.py              # 基础聊天（参数：[用户问题]）
 │       ├── image-understanding.py     # 图像理解（参数：[图片URL]）
 │       ├── tool-calling.py            # 工具调用（参数：[用户问题]）
-│       └── thinking-mode.py           # Thinking 模式（参数：[问题] [思考等级]）
+│       └── thinking-mode.py           # Thinking 模式（参数：[问题] [思考等级] [max_tokens]）
 │
 ├── agnes-2.5-image-flash/             # 图像生成（模型 ID: agnes-image-2.5-flash）
 │   ├── SKILL.md                       # 图像生成详细说明
@@ -195,6 +195,7 @@ agnes-flash-suite/
         ├── keyframe-video.py          # 首尾帧控制（参数：[首帧URL] [尾帧URL] [提示词]）
         ├── image-reference.py         # 图片参考（参数：[参考图片URL] [提示词]）
         ├── audio-reference.py         # 音频参考（参数：[参考音频URL] [提示词]）
+        ├── audio-reference-base64.py # Base64 内联音频参考（参数：[本地音频文件路径] [提示词]，免托管）
         └── query-video.py             # 查询结果（参数：<video_id> [api_key]）
 ```
 

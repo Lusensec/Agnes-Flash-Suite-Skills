@@ -7,7 +7,6 @@
 
 import json
 import os
-import re
 import urllib.request
 import sys
 
@@ -51,7 +50,7 @@ print(json.dumps(result, indent=2, ensure_ascii=False))
 b64_data = result["data"][0]["b64_json"]
 if not b64_data:
     print("[ERR] 获取 Base64 数据失败")
-    exit(1)
+    sys.exit(1)
 
 print("[OK] 图片生成完成！")
 print(f"Base64 长度：{len(b64_data)} 字符")
