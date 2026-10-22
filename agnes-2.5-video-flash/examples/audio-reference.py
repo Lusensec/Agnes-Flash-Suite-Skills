@@ -18,8 +18,8 @@ import load_env
 load_env.load_env()
 
 API_KEY = os.environ.get("AGNESAI_API_KEY", "your-api-key-here")
-BASE_URL = "https://api.agnes-ai.cn/v1"
-POLL_URL = "https://api.agnes-ai.cn/agnesapi"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
+POLL_URL = f"{BASE_URL}/agnesapi"
 
 AUDIO_SOURCE = sys.argv[1] if len(sys.argv) > 1 else "https://example.com/reference-audio.mp3"
 PROMPT = sys.argv[2] if len(sys.argv) > 2 else "以 <Audio 1> 的节奏和环境氛围作为参考，生成电影感夜间驾驶画面"
@@ -76,7 +76,7 @@ payload = {
 }
 
 req = urllib.request.Request(
-    f"{BASE_URL}/videos",
+    f"{BASE_URL}/v1/videos",
     data=json.dumps(payload).encode("utf-8"),
     headers={
         "Authorization": f"Bearer {API_KEY}",

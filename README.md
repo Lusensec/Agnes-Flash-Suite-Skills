@@ -50,10 +50,12 @@ cp .env.example .env
 
 编辑 `.env` 文件（KEY=VALUE 格式，无需 export）：
 ```
+AGNESAI_BASE_URL=https://api.agnes-ai.cn
 AGNESAI_API_KEY=sk-你的实际API Key
 ```
 
 > 脚本会自动从所在目录或上级目录查找 `.env`，无需手动 export。
+> `AGNESAI_BASE_URL` 可选：默认即官方端点 `https://api.agnes-ai.cn`（不含 `/v1` 路径）；走自建/代理网关时修改。
 > 获取 API Key：https://platform.agnes-ai.cn
 
 ## 模型介绍

@@ -14,7 +14,7 @@ import load_env
 load_env.load_env()
 
 API_KEY = os.environ.get("AGNESAI_API_KEY", "your-api-key-here")
-BASE_URL = "https://api.agnes-ai.cn/v1"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
 
 INPUT_IMAGE = sys.argv[1] if len(sys.argv) > 1 else "https://example.com/input-image.png"
 PROMPT = sys.argv[2] if len(sys.argv) > 2 else "Transform the scene into a rain-soaked cyberpunk night with neon reflections while preserving the original composition"
@@ -35,7 +35,7 @@ payload = {
 }
 
 req = urllib.request.Request(
-    f"{BASE_URL}/images/generations",
+    f"{BASE_URL}/v1/images/generations",
     data=json.dumps(payload).encode("utf-8"),
     headers={
         "Authorization": f"Bearer {API_KEY}",

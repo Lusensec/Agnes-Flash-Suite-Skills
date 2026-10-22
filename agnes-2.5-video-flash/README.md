@@ -17,10 +17,12 @@
 复制 `.env.example` 为 `.env`（放在本 skill 根目录），填入 API Key：
 
 ```
+AGNESAI_BASE_URL=https://api.agnes-ai.cn
 AGNESAI_API_KEY=sk-你的实际API Key
 ```
 
 > 脚本会自动从 `.env` 加载，无需手动 export。获取 API Key：https://platform.agnes-ai.cn
+> `AGNESAI_BASE_URL` 可选：默认官方端点，走自建/代理网关时修改（不含 `/v1` 路径）。
 
 ### 2. 文生视频
 

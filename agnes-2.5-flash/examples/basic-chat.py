@@ -13,7 +13,7 @@ import load_env
 load_env.load_env()
 
 API_KEY = os.environ.get("AGNESAI_API_KEY", "your-api-key-here")
-BASE_URL = "https://api.agnes-ai.cn/v1"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
 
 USER_MESSAGE = sys.argv[1] if len(sys.argv) > 1 else "Explain how autonomous agents use tools to complete tasks."
 
@@ -31,7 +31,7 @@ payload = {
 }
 
 req = urllib.request.Request(
-    f"{BASE_URL}/chat/completions",
+    f"{BASE_URL}/v1/chat/completions",
     data=json.dumps(payload).encode("utf-8"),
     headers={
         "Authorization": f"Bearer {API_KEY}",

@@ -15,8 +15,8 @@ import load_env
 load_env.load_env()
 
 API_KEY = os.environ.get("AGNESAI_API_KEY", "your-api-key-here")
-BASE_URL = "https://api.agnes-ai.cn/v1"
-POLL_URL = "https://api.agnes-ai.cn/agnesapi"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
+POLL_URL = f"{BASE_URL}/agnesapi"
 
 IMAGE_URL = sys.argv[1] if len(sys.argv) > 1 else "https://example.com/character.png"
 PROMPT = sys.argv[2] if len(sys.argv) > 2 else "以 <Picture 1> 中的角色和美术风格为参考，角色在花田中自然奔跑，保持外观一致"
@@ -36,7 +36,7 @@ payload = {
 }
 
 req = urllib.request.Request(
-    f"{BASE_URL}/videos",
+    f"{BASE_URL}/v1/videos",
     data=json.dumps(payload).encode("utf-8"),
     headers={
         "Authorization": f"Bearer {API_KEY}",

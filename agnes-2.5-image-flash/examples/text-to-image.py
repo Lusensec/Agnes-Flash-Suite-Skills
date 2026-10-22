@@ -14,7 +14,7 @@ import load_env
 load_env.load_env()
 
 API_KEY = os.environ.get("AGNESAI_API_KEY", "your-api-key-here")
-BASE_URL = "https://api.agnes-ai.cn/v1"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
 
 # 从命令行参数读取（可选），否则使用默认值
 PROMPT = sys.argv[1] if len(sys.argv) > 1 else "A luminous floating city above a misty canyon at sunrise, cinematic realism, wide angle, rich architectural details, soft golden light, high visual density"
@@ -34,7 +34,7 @@ payload = {
 }
 
 req = urllib.request.Request(
-    f"{BASE_URL}/images/generations",
+    f"{BASE_URL}/v1/images/generations",
     data=json.dumps(payload).encode("utf-8"),
     headers={
         "Authorization": f"Bearer {API_KEY}",

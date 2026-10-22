@@ -27,7 +27,8 @@ print("查询视频任务状态...")
 print(f"Video ID: {VIDEO_ID}")
 print("")
 
-POLL_URL = "https://api.agnes-ai.cn/agnesapi"
+BASE_URL = os.environ.get("AGNESAI_BASE_URL", "https://api.agnes-ai.cn").rstrip("/")
+POLL_URL = f"{BASE_URL}/agnesapi"
 MAX_RETRIES = 120
 RETRY_INTERVAL = 5
 
