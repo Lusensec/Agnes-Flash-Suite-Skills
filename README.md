@@ -6,9 +6,7 @@
 
 <img src="images/wechat-qr-combo.png" alt="小落AI站 公众号" width="540">
 
-扫左侧二维码即可关注，或在微信「搜一搜」中搜索「小落AI站」：
-
-<img src="images/wechat-search-banner.png" alt="微信搜一搜 小落AI站" width="460">
+扫左侧二维码即可关注后续更新动态，或在微信「搜一搜」中搜索「小落AI站」
 
 > 「小落AI站」公众号将持续更新 Agnes 模型能力实测、Skill 教程与使用技巧，欢迎扫码关注。
 
