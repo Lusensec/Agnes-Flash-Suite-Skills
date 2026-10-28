@@ -4,7 +4,7 @@
 
 ## 关注公众号
 
-<img src="images/wechat-qr-combo.png" alt="小落AI站 公众号" width="540">
+<img src="images/wechat-qr-combo.png" alt="小落AI站 公众号">
 
 扫左侧二维码即可关注后续更新动态，或在微信「搜一搜」中搜索「小落AI站」
 
