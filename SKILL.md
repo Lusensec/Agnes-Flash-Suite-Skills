@@ -1,5 +1,5 @@
 ---
-name: Agnes-Flash-Suite-Skills
+name: agnes-flash-suite-skills
 description: |
   Agnes Flash 全能力套件 Skill。
   包含 3.0/2.5 对话模型、图像生成、视频生成四大核心能力。
