@@ -20,6 +20,8 @@
 请安装 Agnes AI Skill：https://github.com/Lusensec/Agnes-flash-suite-skills
 ```
 
+> 国内网络访问 GitHub 不便时，可用 Gitee 镜像：https://gitee.com/lusensec/Agnes-Flash-Suite-Skills
+
 ### 方式二：单独安装（按需选择）
 
 每个子目录都是**自包含的独立 Skill**，只保留需要的功能。从 GitHub 下载对应子目录，放入 Agent 的 skills 目录即可。
@@ -34,8 +36,10 @@
 **示例：单独使用图像生成 Skill**
 
 ```bash
-# 从 GitHub 下载仓库
+# 从 GitHub 下载仓库（国内网络可用 Gitee 镜像）
 git clone https://github.com/Lusensec/Agnes-flash-suite-skills.git
+# Gitee 镜像：
+# git clone https://gitee.com/lusensec/Agnes-Flash-Suite-Skills.git
 cd Agnes-flash-suite-skills
 
 # 提取单个子 Skill（子目录自包含 examples/load_env.py，可直接独立运行）
