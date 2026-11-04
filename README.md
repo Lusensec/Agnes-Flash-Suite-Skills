@@ -20,7 +20,11 @@
 请安装 Agnes AI Skill：https://github.com/Lusensec/Agnes-flash-suite-skills
 ```
 
-> 国内网络访问 GitHub 不便时，可用 Gitee 镜像：https://gitee.com/lusensec/Agnes-Flash-Suite-Skills
+> 国内网络访问 GitHub 不便时，可用 Gitee 镜像：
+
+```
+请安装 Agnes AI Skill：https://gitee.com/Lusensec/Agnes-Flash-Suite-Skills
+```
 
 ### 方式二：单独安装（按需选择）
 
